@@ -1,21 +1,19 @@
-name: Build and Push Docker Image 
+name: Build and Push Docker Image
 on:
-  push:
-   branches: [ "master" ]   
-jobs:
-
- build: 
-  runs-on: ubuntu-latest
-  
-  steps:
-  - uses: actions/checkout@v3
-    name: Build & push Docker image 
-    uses: mr-smithers-excellent/docker-build-push@v5
-    with:
-        image: repo/image
-        tags: v3
-        registry: ghcr.io
-        dockerfile: Dockerfile
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
+  push:
+    branches: [ "master" ]
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+    - name: Build and push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: repo/image
+        tags: v3
+        registry: ghcr.io
+        dockerfile: Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
